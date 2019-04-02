@@ -89,13 +89,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Tue Apr  2 13:17:33 2019
+#> File: Makefile.demo written at Tue Apr  2 13:58:25 2019
 ```
 
 ``` bash
 cat Makefile.demo
 # File: Makefile.demo
-# Created at: Tue Apr  2 13:17:33 2019
+# Created at: Tue Apr  2 13:58:25 2019
 
 # Produced by gnumaker:  0.0.0.9002 on R version 3.5.3 (2019-03-11)
 # Before running make, please check file and edit if necessary
@@ -155,4 +155,6 @@ rapidly over the next few months.
   - allow specification of *global options* in `zzz.R` so that it is
     easier to customise defaults
   - either incorporate `makefile2graph` as a way of plotting `Makefile`s
-    not made with **gnumaker** or write own functions. (See )
+    not made with **gnumaker** or write own functions. (See
+    [makefile2graph on
+    github](https://github.com/lindenb/makefile2graph "makefile2graph on github"))
