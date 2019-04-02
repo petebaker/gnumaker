@@ -1,19 +1,29 @@
 Package: gnumaker
-Title:   GNU Makefile Creation and Plotting for Data Analysis Projects
-Version:     0.0.0.9000
-Authors@R:   person("Peter", "Baker", email = "drpetebaker@gmail.com",
+Title: GNU Makefile Creation and Plotting for Data Analysis Projects
+Version: 0.0.0.9002
+Authors@R: person("Peter", "Baker", email = "drpetebaker@gmail.com",
              role = c("aut", "cre"), comment = c(ORCID = "0000-0002-1241-7263"))
 Description: GNU Make is the defacto standard for efficiently
              rerunning appropriate steps in the data analysis or
-             reporting process if a particular file is changed. Only
-             the necessary steps are rerun. The gnumaker package makes
-             if easy to create and use GNU Makefiles to aid a
-             reproducible work flow for data analysis projects.
-License:     GPL-3
-URL:         https://github.com/petebaker/gnumaker
-BugReports:  https://github.com/petebaker/gnumaker/issues
-Depends:     R (>= 3.5.2)
-Imports:     MakefileR (>=1.0),
-             Rgraphviz (>=2.14.0)
-Encoding:    UTF-8
-LazyData:    true
+             reporting process if a particular file is
+             changed. Following changes, only the necessary steps are
+             rerun. While GNU Make is usually thought of as a system for
+	     creating executables from source, the gnumaker package makes
+	     if easy to create and use GNU Makefiles to aid a reproducible
+	     work flow for data analysis projects.
+License: GPL-3
+URL: https://github.com/petebaker/gnumaker
+BugReports: https://github.com/petebaker/gnumaker/issues
+Depends: R (>= 3.5.0)
+Imports: 
+    Rgraphviz (>= 2.14.0),
+    gRbase,
+    graph,
+    stringr,
+    tools,
+    purrr,
+    utils,
+    formatR
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1

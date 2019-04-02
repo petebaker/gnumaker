@@ -1,0 +1,30 @@
+# File: Makefile.demo
+# Created at: Tue Apr  2 13:17:34 2019
+
+# Produced by gnumaker:  0.0.0.9002 on R version 3.5.3 (2019-03-11)
+# Before running make, please check file and edit if necessary
+
+# .PHONY all target which is run when make is invoked
+.PHONY: all
+all: report1.pdf report2.docx
+
+# report1.pdf depends on report1.Rmd, linmod.Rout
+report1.pdf: report1.Rmd linmod.Rout
+
+# report2.docx depends on report2.Rmd, linmod.Rout
+report2.docx: report2.Rmd linmod.Rout
+
+# plots and analysis using 'linmod.R'
+linmod.Rout: linmod.R read.Rout
+
+# read.Rout depends on read.R, simple.csv
+read.Rout: read.R simple.csv
+
+# include GNU Makfile rules. Most recent version available at
+# https://github.com/petebaker/r-makefile-definitions
+include~/lib/r-rules.mk
+
+# remove all target, output and extraneous files
+.PHONY: cleanall
+cleanall:
+	rm -f *~ *.Rout *.RData *.docx *.pdf *.html *-syntax.R *.RData

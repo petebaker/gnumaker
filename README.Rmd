@@ -12,9 +12,9 @@ knitr::opts_chunk$set(
   fig.path = "images/"
 )
 
-##version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])
-##version <- gsub('-', '.', version)
-version <- "0.0.9000"
+version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])
+version <- gsub('-', '.', version)
+##version <- "0.0.9002"
 ```
 
 # gnumaker
@@ -55,8 +55,8 @@ devtools::install_github("petebaker/gnumaker")
 There are three key functions in **gnumaker**. These are:
 
 * `create_makefile()` creates a gnu\_makefile object given dependencies between syntax, data and output files,
-* `plot_makefile()` plots a DAG for a gnu\_makefile object and
 * `write_makefile()` writes a Makfile to disk.
+* `plot()` plots a DAG for a gnu\_makefile object and
 
 ## Examples
 
@@ -69,52 +69,58 @@ encapsulated in a Makefile which is then employed to manage the
 process and generate or regenerate any intermediate files when the
 data or syntax changes.
 
-```{r, eval = FALSE, simple-demo}
-library(gnumaker)
+Here we assume the default target file extension for running an _R_
+file is _Rout_ (default) but instead specify the output types for the
+_.Rmd_ files targets 'read' depends on _read.r_ and _simple.csv_,
+'linmod' on _linmod.R_ and 'read' etc. Note that we can change the
+default target file extension using the 'default.exts' argument and
+specify say a HTML target file with _default.exts = list(R = "html")_.
 
-## Here we assume the default extension for running R file is Rout
-## (default) but instead specify the output types for the .Rmd files
-## targets 'read' depends on read.r & simple.csv, 'linmod' on linmod.R
-## and 'read' etc
+
+```{r, simple-demo}
+library(gnumaker)
 gm1 <-
   create_makefile(targets = list(read = c("read.R", "simple.csv"),
                                  linmod = c("linmod.R", "read"),
                                  rep1 = c("report1.Rmd", "linmod"),
                                  rep2 = c("report2.Rmd", "linmod")),
-                  phony = list(all = c("rep1", "rep2")),
-                  comments = list(linmod = "plots and analysis using 'linmod.R'")
-                  file.exts = list(Rmd = list(rep1 = "pdf", rep2 = "docx")))
-write_makefile(gm1)
-plot_makefile(gm1)                  
+    comments = list(linmod = "plots and analysis using 'linmod.R'"),
+                      file.exts = list(rep1 = "pdf", rep2 = "docx"))
 ```
 
-The Makefile produced with `write_makefile(gm1)` is
+A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
-```{bash, eval = FALSE, simple-makefile}
-.PHONY: all
-all: report1.pdf report2.docx
-
-# produce report(s) from .Rmd: depends on linmod.Rout
-report1.pdf: ${@:.pdf=.Rmd} linmod.Rout
-
-# produce report(s) from .Rmd: depends on linmod.Rout
-report2.docx: ${@:.docx=.Rmd} linmod.Rout
-
-# plots and analysis using 'linmod.R'
-linmod.Rout: ${@:.Rout=.R} read.Rout
-
-# read.Rout: depends on read.R and simple.csv
-read.Rout: ${@:.Rout=.R} simple.csv
-
-include r-rules.mk
+```{r, simple-makefile}
+write_makefile(gm1, file = "Makefile.demo")
 ```
 
-The DAG of the Makefile produced with `plot_makefile(gm1)` is
+```{bash, simple-makefile-gm1, comment=""}
+cat Makefile.demo
+```
 
-![DAG for simple demo Makefile. Using the minimal set of files (shown
-in green rectangles), then GNU Make allows us to (re)generate all
-other files shown as wheat coloured
-circles))](images/simple-demo.png)
+The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`.
 
+```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
+plot(gm1)
+```
 
 For more examples, see the gnumaker vignette (under construction).
+
+## Notes
+
+**gnumaker** is under construction and should change (and improve)
+rapidly over the next few months.
+
+## To do
+
+- add all dependency and target file extensions in `r-rules.mk`,
+  preferably by parsing the included file
+- add `testthat` unit testing for more complicated examples
+- allow for target file extensions and dependency files to be set as
+  user specified variables which would make the `Makefile`s produced
+  more flexible but less easy to read
+- allow specification of _global options_ in `zzz.R` so that it is 
+  easier to customise defaults
+- either incorporate `makefile2graph` as a way of plotting `Makefile`s not
+  made with **gnumaker** or write own functions.
+  (See \url{https://github.com/lindenb/makefile2graph})

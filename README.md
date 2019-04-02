@@ -3,7 +3,7 @@
 
 # gnumaker
 
-Version: 0.0.9000
+Version: 0.0.0.9002
 
 ## Overview
 
@@ -54,8 +54,8 @@ There are three key functions in **gnumaker**. These are:
 
   - `create_makefile()` creates a gnu\_makefile object given
     dependencies between syntax, data and output files,
-  - `plot_makefile()` plots a DAG for a gnu\_makefile object and
   - `write_makefile()` writes a Makfile to disk.
+  - `plot()` plots a DAG for a gnu\_makefile object and
 
 ## Examples
 
@@ -67,50 +67,92 @@ results two reports, `report1.pdf` and `report2.docx` are produced from
 Makefile which is then employed to manage the process and generate or
 regenerate any intermediate files when the data or syntax changes.
 
+Here we assume the default target file extension for running an *R* file
+is *Rout* (default) but instead specify the output types for the *.Rmd*
+files targets ‘read’ depends on *read.r* and *simple.csv*, ‘linmod’ on
+*linmod.R* and ‘read’ etc. Note that we can change the default target
+file extension using the ‘default.exts’ argument and specify say a HTML
+target file with *default.exts = list(R = “html”)*.
+
 ``` r
 library(gnumaker)
-
-## Here we assume the default extension for running R file is Rout
-## (default) but instead specify the output types for the .Rmd files
-## targets 'read' depends on read.r & simple.csv, 'linmod' on linmod.R
-## and 'read' etc
 gm1 <-
   create_makefile(targets = list(read = c("read.R", "simple.csv"),
                                  linmod = c("linmod.R", "read"),
                                  rep1 = c("report1.Rmd", "linmod"),
                                  rep2 = c("report2.Rmd", "linmod")),
-                  phony = list(all = c("rep1", "rep2")),
-                  comments = list(linmod = "plots and analysis using 'linmod.R'")
-                  file.exts = list(Rmd = list(rep1 = "pdf", rep2 = "docx")))
-write_makefile(gm1)
-plot_makefile(gm1)                  
+    comments = list(linmod = "plots and analysis using 'linmod.R'"),
+                      file.exts = list(rep1 = "pdf", rep2 = "docx"))
 ```
 
-The Makefile produced with `write_makefile(gm1)` is
+A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
+
+``` r
+write_makefile(gm1, file = "Makefile.demo")
+#> File: Makefile.demo written at Tue Apr  2 13:17:33 2019
+```
 
 ``` bash
+cat Makefile.demo
+# File: Makefile.demo
+# Created at: Tue Apr  2 13:17:33 2019
+
+# Produced by gnumaker:  0.0.0.9002 on R version 3.5.3 (2019-03-11)
+# Before running make, please check file and edit if necessary
+
+# .PHONY all target which is run when make is invoked
 .PHONY: all
 all: report1.pdf report2.docx
 
-## produce report(s) from .Rmd: depends on linmod.Rout
-report1.pdf: ${@:.pdf=.Rmd} linmod.Rout
+# report1.pdf depends on report1.Rmd, linmod.Rout
+report1.pdf: report1.Rmd linmod.Rout
 
-## produce report(s) from .Rmd: depends on linmod.Rout
-report2.docx: ${@:.docx=.Rmd} linmod.Rout
+# report2.docx depends on report2.Rmd, linmod.Rout
+report2.docx: report2.Rmd linmod.Rout
 
-## plots and analysis using 'linmod.R'
-linmod.Rout: ${@:.Rout=.R} read.Rout
+# plots and analysis using 'linmod.R'
+linmod.Rout: linmod.R read.Rout
 
-## read.Rout: depends on read.R and simple.csv
-read.Rout: ${@:.Rout=.R} simple.csv
+# read.Rout depends on read.R, simple.csv
+read.Rout: read.R simple.csv
 
-include r-rules.mk
+# include GNU Makfile rules. Most recent version available at
+# https://github.com/petebaker/r-makefile-definitions
+include~/lib/r-rules.mk
+
+# remove all target, output and extraneous files
+.PHONY: cleanall
+cleanall:
+    rm -f *~ *.Rout *.RData *.docx *.pdf *.html *-syntax.R *.RData
 ```
 
-The DAG of the Makefile produced with `plot_makefile(gm1)` is
+The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`.
 
-![DAG for simple demo Makefile. Using the minimal set of files (shown in
-green rectangles), then GNU Make allows us to (re)generate all other
-files shown as wheat coloured circles))](images/simple-demo.png)
+``` r
+plot(gm1)
+```
+
+![DAG of Makefile for simple example. The DAG of the `gnu_makefile`
+object can be produced with `plot(gm1)`. Using the minimal set of files
+(shown in green rectangles), then GNU Make allows us to (re)generate all
+other files shown as wheat coloured circles)](images/simple-dag-1.png)
 
 For more examples, see the gnumaker vignette (under construction).
+
+## Notes
+
+**gnumaker** is under construction and should change (and improve)
+rapidly over the next few months.
+
+## To do
+
+  - add all dependency and target file extensions in `r-rules.mk`,
+    preferably by parsing the included file
+  - add `testthat` unit testing for more complicated examples
+  - allow for target file extensions and dependency files to be set as
+    user specified variables which would make the `Makefile`s produced
+    more flexible but less easy to read
+  - allow specification of *global options* in `zzz.R` so that it is
+    easier to customise defaults
+  - either incorporate `makefile2graph` as a way of plotting `Makefile`s
+    not made with **gnumaker** or write own functions. (See )
