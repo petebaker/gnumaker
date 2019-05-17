@@ -89,13 +89,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Tue Apr  2 13:58:25 2019
+#> File: Makefile.demo written at Fri May 17 15:48:23 2019
 ```
 
 ``` bash
 cat Makefile.demo
 # File: Makefile.demo
-# Created at: Tue Apr  2 13:58:25 2019
+# Created at: Fri May 17 15:48:23 2019
 
 # Produced by gnumaker:  0.0.0.9002 on R version 3.5.3 (2019-03-11)
 # Before running make, please check file and edit if necessary
