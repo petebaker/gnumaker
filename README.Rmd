@@ -113,14 +113,17 @@ rapidly over the next few months.
 
 ## To do
 
-- add all dependency and target file extensions in `r-rules.mk`,
-  preferably by parsing the included file
-- add `testthat` unit testing for more complicated examples
-- allow for target file extensions and dependency files to be set as
-  user specified variables which would make the `Makefile`s produced
-  more flexible but less easy to read
-- allow specification of _global options_ in `zzz.R` so that it is 
-  easier to customise defaults
-- either incorporate `makefile2graph` as a way of plotting `Makefile`s not
+- DONE extract dependency and target file extensions in `r-rules.mk`,
+  preferably by parsing the included file (done using `pattern-exts`')
+- TODO incorporate dependency and target file extensions extracted
+  using `pattern-exts` into `create_makefile` and set defaults
+- TODO allow specification of _global options_ in `zzz.R` so that it
+  is easier to customise defaults e.g. so user can specify defaults in
+  .Rprofile
+- TODO add `testthat` unit testing for more complicated examples
+- TODO allow for target file extensions and dependency files to be set
+  as user specified variables which would make the `Makefile`s
+  produced more flexible but less easy to read
+- TODO either incorporate `makefile2graph` as a way of plotting `Makefile`s not
   made with **gnumaker** or write own functions.
   (See [makefile2graph on github](https://github.com/lindenb/makefile2graph "makefile2graph on github"))

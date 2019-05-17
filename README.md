@@ -89,13 +89,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Fri May 17 15:48:23 2019
+#> File: Makefile.demo written at Fri May 17 16:17:57 2019
 ```
 
 ``` bash
 cat Makefile.demo
 # File: Makefile.demo
-# Created at: Fri May 17 15:48:23 2019
+# Created at: Fri May 17 16:17:57 2019
 
 # Produced by gnumaker:  0.0.0.9002 on R version 3.5.3 (2019-03-11)
 # Before running make, please check file and edit if necessary
@@ -146,15 +146,18 @@ rapidly over the next few months.
 
 ## To do
 
-  - add all dependency and target file extensions in `r-rules.mk`,
-    preferably by parsing the included file
-  - add `testthat` unit testing for more complicated examples
-  - allow for target file extensions and dependency files to be set as
-    user specified variables which would make the `Makefile`s produced
-    more flexible but less easy to read
-  - allow specification of *global options* in `zzz.R` so that it is
-    easier to customise defaults
-  - either incorporate `makefile2graph` as a way of plotting `Makefile`s
-    not made with **gnumaker** or write own functions. (See
+  - DONE extract dependency and target file extensions in `r-rules.mk`,
+    preferably by parsing the included file (done using `pattern-exts`’)
+  - TODO incorporate dependency and target file extensions extracted
+    using `pattern-exts` into `create_makefile` and set defaults
+  - TODO allow specification of *global options* in `zzz.R` so that it
+    is easier to customise defaults e.g. so user can specify defaults in
+    .Rprofile
+  - TODO add `testthat` unit testing for more complicated examples
+  - TODO allow for target file extensions and dependency files to be set
+    as user specified variables which would make the `Makefile`s
+    produced more flexible but less easy to read
+  - TODO either incorporate `makefile2graph` as a way of plotting
+    `Makefile`s not made with **gnumaker** or write own functions. (See
     [makefile2graph on
     github](https://github.com/lindenb/makefile2graph "makefile2graph on github"))
