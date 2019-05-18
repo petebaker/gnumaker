@@ -69,12 +69,15 @@ regenerate any intermediate files when the data or syntax changes.
 
 Using the **gnumaker** package we simply need to provide a list of
 targets to the the `create_makefile` function where the components
-specify a target and dependency file(s). The package uses the GNU Make
-pattern rules in *r-rules.mk* to choose file names for targets but we
-can override the defaults. For instance, in the example below we provide
-the first target as the first component of the list as `read =
-c("read.R", "simple.csv")` the second target depends on the `read`
-target and `linmod.R` and so we specify this with `linmod =
+specify a target as a name and dependency file(s) as a character vector.
+The package uses the GNU Make pattern rules in *r-rules.mk* to choose
+file names for targets but we can override the defaults.
+
+For instance, in this example the first two dependency files are
+`simple.csv` and `read.R` so we provide the first target as the first
+component of the list as `read = c("read.R", "simple.csv")`, where the
+name `read` can be anything we like. The second target depends on the
+`read` target and `linmod.R` and so we specify this with `linmod =
 c("linmod.R", "read")` and so on.
 
 Target file names are substituted using defaults and the *Makefile* is
@@ -83,6 +86,13 @@ target file for the first dependency in the `read` component, which is
 `read.R`, becomes `read.Rout` but we can change the default target file
 extension for all `.R` files using the `default.exts` argument and
 specify say a HTML target file with `default.exts = list(R = "html")`.
+
+Finally we specify the first target (usually `all`) as two reports
+`report1.pdf` and `report2.docx` using `target.all = c("rep1","rep2")`
+which by default would be `report1.html` and `report2.html` but which we
+specify as `report1.pdf` and `report2.docx` by specifying the option
+`all.exts = list(rep1 = "pdf", rep2 = "docx")`. The `Makefile` is
+specified, printed and plotted using:
 
 ``` r
 library(gnumaker)
@@ -100,11 +110,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sat May 18 18:54:01 2019
+#> File: Makefile.demo written at Sun May 19 01:15:48 2019
 ```
 
     # File: Makefile.demo
-    # Created at: Sat May 18 18:54:01 2019
+    # Created at: Sun May 19 01:15:48 2019
     
     # Produced by gnumaker:  0.0.0.9004 on R version 3.5.3 (2019-03-11)
     # Before running make, please check file and edit if necessary
