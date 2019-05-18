@@ -100,11 +100,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sat May 18 18:43:44 2019
+#> File: Makefile.demo written at Sat May 18 18:54:01 2019
 ```
 
     # File: Makefile.demo
-    # Created at: Sat May 18 18:43:44 2019
+    # Created at: Sat May 18 18:54:01 2019
     
     # Produced by gnumaker:  0.0.0.9004 on R version 3.5.3 (2019-03-11)
     # Before running make, please check file and edit if necessary
@@ -156,7 +156,7 @@ rapidly over the next few months.
 
   - DONE extract dependency and target file extensions in `r-rules.mk`,
     preferably by parsing the included file (done using `pattern-exts`’)
-  - TODO incorporate dependency and target file extensions extracted
+  - DONE incorporate dependency and target file extensions extracted
     using `pattern-exts` into `create_makefile` and set defaults
   - TODO move `pattern_exts` to internal functions and create
     `show_extensions` to assist user specification

@@ -127,7 +127,7 @@ rapidly over the next few months.
 
 - DONE extract dependency and target file extensions in `r-rules.mk`,
   preferably by parsing the included file (done using `pattern-exts`')
-- TODO incorporate dependency and target file extensions extracted
+- DONE incorporate dependency and target file extensions extracted
   using `pattern-exts` into `create_makefile` and set defaults
 - TODO move `pattern_exts` to internal functions and create
   `show_extensions` to assist user specification
