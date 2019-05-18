@@ -57,7 +57,7 @@ There are three key functions in **gnumaker**. These are:
   - `write_makefile()` writes a Makfile to disk.
   - `plot()` plots a DAG for a gnu\_makefile object and
 
-## Examples
+## Example
 
 Suppose we have a data file `simple.csv` and use `read.R` to read and
 clean the data. After storing the cleaned data in a .RData file, we then
@@ -91,8 +91,14 @@ Finally we specify the first target (usually `all`) as two reports
 `report1.pdf` and `report2.docx` using `target.all = c("rep1","rep2")`
 which by default would be `report1.html` and `report2.html` but which we
 specify as `report1.pdf` and `report2.docx` by specifying the option
-`all.exts = list(rep1 = "pdf", rep2 = "docx")`. The `Makefile` is
-specified, printed and plotted using:
+`all.exts = list(rep1 = "pdf", rep2 = "docx")`.
+
+To run all R script filesand analyses in order we simply type `make` in
+a terminal or set up `RStudio` or our IDE to use GNU Make as the build
+mechanism which allows us to (re)run analyses by pressing the
+appropriate Build button.
+
+The `Makefile` is specified, printed and plotted using:
 
 ``` r
 library(gnumaker)
@@ -110,11 +116,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun May 19 01:15:48 2019
+#> File: Makefile.demo written at Sun May 19 01:24:03 2019
 ```
 
     # File: Makefile.demo
-    # Created at: Sun May 19 01:15:48 2019
+    # Created at: Sun May 19 01:24:03 2019
     
     # Produced by gnumaker:  0.0.0.9004 on R version 3.5.3 (2019-03-11)
     # Before running make, please check file and edit if necessary

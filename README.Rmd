@@ -58,7 +58,7 @@ There are three key functions in **gnumaker**. These are:
 * `write_makefile()` writes a Makfile to disk.
 * `plot()` plots a DAG for a gnu\_makefile object and
 
-## Examples
+## Example
 
 Suppose we have a data file `simple.csv` and use `read.R` to read and
 clean the data. After storing the cleaned data in a .RData file, we
@@ -96,9 +96,14 @@ Finally we specify the first target (usually `all`) as two reports
 `target.all = c("rep1","rep2")` which by default would be
  `report1.html` and `report2.html` but which we specify as 
  `report1.pdf` and `report2.docx` by specifying the option
- `all.exts = list(rep1 = "pdf", rep2 = "docx")`. The `Makefile` is 
- specified, printed and plotted using:
-
+ `all.exts = list(rep1 = "pdf", rep2 = "docx")`. 
+ 
+ To run all R script filesand analyses in order we simply type `make`
+ in a terminal or set up `RStudio` or our IDE to use GNU Make as the
+ build mechanism which allows us to (re)run analyses by pressing the
+ appropriate Build button.
+ 
+ The `Makefile` is specified, printed and plotted using:
 
 ```{r, simple-demo}
 library(gnumaker)
