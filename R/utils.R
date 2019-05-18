@@ -55,7 +55,8 @@ create_gnumake_dag <- function(target_files, dependency_files, target.all){
 
   ## target all defined (or not then guessed)
   if (!is.null(target.all)){
-    target_all <- sapply(target.all, subst_target_file)
+    ## target_all <- sapply(target.all, subst_target_file)
+    target_all <- target_files$file_names[target.all]
     dag_list$all <- c("all", target_all)
   } else {
     ## create dag so far for working out child nodes
@@ -228,3 +229,39 @@ create_target_files <- function(targets, file.exts, default.exts){
   target_files
 }
 
+## What: load and store target/dependency filename extensions and
+## defaults using 'pattern_exts'
+
+## I'm not sure whether to automate this or not so currently I use it
+## interactively with   save_dep_targ_exts()
+## save defaults at same time for use in 'create_makefile' etc
+## Date: 2019-05-17 at 18:20:35
+## NB: Could use as standalone prog from top level Makefile
+##     and potentially add to .Rbuildignore
+save_dep_targ_exts <- function(x = "../inst/make/r-rules.mk",
+                               OVERWRITE = FALSE){
+
+  if(!OVERWRITE)
+    warning("Call this with save_dep_targ_exts(OVERWRITE = TRUE) ?")
+  
+  dep_targ_definitions <- pattern_exts(x)
+
+  ## default exts is a list but should just be a character vector -
+  ## sure you can only have one!
+  dep_targ_defaults <-
+    list(R = "Rout", r = "Rout",    # perhaps should be "html" ??
+         Rmd = "html", rmd = "html", 
+         Rnw = "pdf", rnw = "pdf",
+         Snw = "pdf", snw = "pdf",
+         tex = "rtf",
+         do = "log", DO = "LOG",
+         sas = "lst", SAS = "LST",
+         PL = "txt", pl = "txt",
+         PY = "txt", py = "txt",
+         PY = "txt", py = "txt",
+         "_Handout.pdf" = "-6up.pdf",
+         "_beamer-handout.pdf" = "_beamer-6up.pdf")
+    
+  usethis::use_data(dep_targ_definitions, dep_targ_defaults, internal = TRUE,
+                    overwrite = OVERWRITE)
+}

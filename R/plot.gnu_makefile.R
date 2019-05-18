@@ -21,8 +21,9 @@
 ##'                   linmod = c("linmod.R", "read"),
 ##'                   rep1 = c("report1.Rmd", "linmod"),
 ##'                   rep2 = c("report2.Rmd", "linmod")),
-##'                   comments = list(linmod = "plots and analysis using 'linmod.R'"),
-##'                   file.exts = list(rep1 = "pdf", rep2 = "docx"))
+##'                   target.all = c("rep1", "rep2"),
+##'                   all.exts = list(rep1 = "pdf", rep2 = "docx"),
+##'                   comments = list(linmod = "plots and analysis using 'linmod.R'"))
 ##' plot(gm1)
 ##' plot(gm1, main = "Makefile for Simple Demo")
 ##' plot(gm1, attrs = list(node = list(fillsize = "20",

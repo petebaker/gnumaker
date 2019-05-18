@@ -24,8 +24,9 @@
 ##'                   linmod = c("linmod.R", "read"),
 ##'                   rep1 = c("report1.Rmd", "linmod"),
 ##'                   rep2 = c("report2.Rmd", "linmod")),
-##'                   comments = list(linmod = "plots and analysis using 'linmod.R'"),
-##'                   file.exts = list(rep1 = "pdf", rep2 = "docx"))
+##'                   target.all = c("rep1", "rep2"),
+##'                   all.exts = list(rep1 = "pdf", rep2 = "docx"),
+##'                   comments = list(linmod = "plots and analysis using 'linmod.R'"))
 ##' write_makefile(gm1)
 ##' 
 ##' @seealso \code{\link{create_makefile}} \code{\link{plot}}
