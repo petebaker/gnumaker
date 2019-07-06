@@ -52,11 +52,12 @@ devtools::install_github("petebaker/gnumaker")
 
 ## Usage
 
-There are three key functions in **gnumaker**. These are:
+There are four key functions in **gnumaker**. These are:
 
 * `create_makefile()` creates a gnu\_makefile object given dependencies between syntax, data and output files,
-* `write_makefile()` writes a Makfile to disk.
-* `plot()` plots a DAG for a gnu\_makefile object and
+* `write_makefile()` writes a Makfile to disk,
+* `info_rules()` describes filename extensions for GNU Make rules, and
+* `plot()` plots a DAG for a gnu\_makefile object.
 
 ## Example
 

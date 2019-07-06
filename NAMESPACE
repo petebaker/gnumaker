@@ -3,5 +3,6 @@
 S3method(plot,gnu_makefile)
 S3method(print,gnu_makefile)
 export(create_makefile)
+export(info_rules)
 export(pattern_exts)
 export(write_makefile)

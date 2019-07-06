@@ -3,7 +3,7 @@
 
 # gnumaker
 
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 
 ## Overview
 
@@ -50,12 +50,13 @@ devtools::install_github("petebaker/gnumaker")
 
 ## Usage
 
-There are three key functions in **gnumaker**. These are:
+There are four key functions in **gnumaker**. These are:
 
   - `create_makefile()` creates a gnu\_makefile object given
     dependencies between syntax, data and output files,
-  - `write_makefile()` writes a Makfile to disk.
-  - `plot()` plots a DAG for a gnu\_makefile object and
+  - `write_makefile()` writes a Makfile to disk,
+  - `info_rules()` describes filename extensions for GNU Make rules, and
+  - `plot()` plots a DAG for a gnu\_makefile object.
 
 ## Example
 
@@ -116,13 +117,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun May 19 01:24:03 2019
+#> File: Makefile.demo written at Sun Jul  7 01:44:53 2019
 ```
 
     # File: Makefile.demo
-    # Created at: Sun May 19 01:24:03 2019
+    # Created at: Sun Jul  7 01:44:53 2019
     
-    # Produced by gnumaker:  0.0.0.9004 on R version 3.5.3 (2019-03-11)
+    # Produced by gnumaker:  0.0.0.9005 on R version 3.6.0 (2019-04-26)
     # Before running make, please check file and edit if necessary
     
     # .PHONY all target which is run when make is invoked
