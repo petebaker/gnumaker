@@ -146,7 +146,7 @@ rapidly over the next few months.
   preferably by parsing the included file (done using `pattern-exts`')
 - DONE incorporate dependency and target file extensions extracted
   using `pattern-exts` into `create_makefile` and set defaults
-- TODO move `pattern_exts` to internal functions and create
+- STARTED move `pattern_exts` to internal functions and create
   `show_extensions` to assist user specification
 - TODO allow specification of _global options_ in `zzz.R` so that it
   is easier to customise defaults e.g. so user can specify defaults in
