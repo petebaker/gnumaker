@@ -134,6 +134,20 @@ The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`.
 plot(gm1)
 ```
 
+We can use the function `info_rules` to determine the possible target
+files for dependency files. For instance, what target files have
+`Makefile` rules for an `.R` R syntax file?
+
+```{r, inforulesr}
+info_rules("R")
+```
+
+For `.Rmd` R Markdown files, use
+
+```{r, inforulesrmd}
+info_rules("Rmd")
+```
+
 For more examples, see the gnumaker vignette (under construction).
 
 ## Notes

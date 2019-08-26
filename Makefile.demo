@@ -1,5 +1,5 @@
 # File: Makefile.demo
-# Created at: Sun Jul  7 01:44:55 2019
+# Created at: Tue Aug 27 00:48:53 2019
 
 # Produced by gnumaker:  0.0.0.9005 on R version 3.6.0 (2019-04-26)
 # Before running make, please check file and edit if necessary
@@ -22,7 +22,7 @@ read.Rout: read.R simple.csv
 
 # include GNU Makfile rules. Most recent version available at
 # https://github.com/petebaker/r-makefile-definitions
-include~/lib/r-rules.mk
+include ~/lib/r-rules.mk
 
 # remove all target, output and extraneous files
 .PHONY: cleanall
