@@ -117,11 +117,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul  7 01:44:53 2019
+#> File: Makefile.demo written at Tue Aug 27 01:09:21 2019
 ```
 
     # File: Makefile.demo
-    # Created at: Sun Jul  7 01:44:53 2019
+    # Created at: Tue Aug 27 01:09:21 2019
     
     # Produced by gnumaker:  0.0.0.9005 on R version 3.6.0 (2019-04-26)
     # Before running make, please check file and edit if necessary
@@ -144,7 +144,7 @@ write_makefile(gm1, file = "Makefile.demo")
     
     # include GNU Makfile rules. Most recent version available at
     # https://github.com/petebaker/r-makefile-definitions
-    include~/lib/r-rules.mk
+    include ~/lib/r-rules.mk
     
     # remove all target, output and extraneous files
     .PHONY: cleanall
@@ -162,6 +162,49 @@ object can be produced with `plot(gm1)`. Using the minimal set of files
 (shown in green rectangles), then GNU Make allows us to (re)generate all
 other files shown as wheat coloured circles)](images/simple-dag-1.png)
 
+We can use the function `info_rules` to determine the possible target
+files for dependency files. For instance, what target files have
+`Makefile` rules for an `.R` R syntax file?
+
+``` r
+info_rules("R")
+#> Possible filename extensions for 'R':
+#> [1] "docx" "html" "odt"  "pdf"  "Rout" "rtf" 
+#> 
+#> Default: 'Rout'
+#> 
+#> Example rule:
+#> example1.Rout: example1.R dep_file2 dep_file3
+```
+
+For `.Rmd` R Markdown files, use
+
+``` r
+info_rules("Rmd")
+#> Possible filename extensions for 'Rmd':
+#>  [1] "_beamer-handout.Rmd" "_beamer.pdf"         "_ioslides.html"     
+#>  [4] "_slidy.html"         "_tufte.pdf"          "-syntax.R"          
+#>  [7] "docx"                "html"                "odt"                
+#> [10] "pdf"                 "pptx"                "rtf"                
+#> 
+#> Default: 'html'
+#> 
+#> Example rule:
+#> example1.html: example1.Rmd dep_file2 dep_file3
+#> 
+#> Other options are available for R Markdown files, such as:
+#> 
+#> example1_ioslides.html: example1.Rmd dep_file2 dep_file3
+#> example1_beamer.pdf: example1.Rmd dep_file2 dep_file3
+#> 
+#> to produce ioslide and beamer presentation formats.
+#> 
+#> An R syntax file can be produced with
+#>   make example1-syntax.R
+#> and a similar rule can be specified if necessary with
+#> example1-syntax.R: example1.Rmd dep_file2 dep_file3
+```
+
 For more examples, see the gnumaker vignette (under construction).
 
 ## Notes
@@ -175,7 +218,7 @@ rapidly over the next few months.
     preferably by parsing the included file (done using `pattern-exts`’)
   - DONE incorporate dependency and target file extensions extracted
     using `pattern-exts` into `create_makefile` and set defaults
-  - TODO move `pattern_exts` to internal functions and create
+  - STARTED move `pattern_exts` to internal functions and create
     `show_extensions` to assist user specification
   - TODO allow specification of *global options* in `zzz.R` so that it
     is easier to customise defaults e.g. so user can specify defaults in
