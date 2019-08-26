@@ -17,7 +17,7 @@
 ##' @param target.all a character vector containing file names that
 ##'   will be specified as a phony target at top of file and so will
 ##'   always be made when make is run. Default: the last target in the
-##'   \code{targets} list but ideally this should be set tin order to
+##'   \code{targets} list but ideally this should be set in order to
 ##'   produce a more flexible \code{Makefile}
 ##' @param all.exts a list specifying which target file extension
 ##'   should be used for each specific target specified in
@@ -148,7 +148,7 @@ create_makefile  <-
                     function(x) c("", target_comments[x], gnumake_rules[x]))),
       "", "# include GNU Makfile rules. Most recent version available at",
       "# https://github.com/petebaker/r-makefile-definitions",
-      stringr::str_c("include", rules.mk), "", phony))
+      stringr::str_c("include ", rules.mk), "", phony))
   names(gnu_makefile) <- NULL
 
   gnumaker <- list(gnu_makefile = gnu_makefile, makefile_dag = makefile_dag)
