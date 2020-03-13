@@ -3,7 +3,7 @@
 
 # gnumaker
 
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 
 ## Overview
 
@@ -37,14 +37,21 @@ Install the latest CRAN version of **gnumaker** with:
 ```r
 ##install.packages("gnumaker")
 ```
+## Note that three dependencies are in BioConductor so use BiocManager
+NB: parked here in case biocViews: line in DESCRIPTION does not work
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+   install.packages("BiocManager")
+devtools::install_github("petebaker/gnumaker", repos = BiocManager::repositories())
 -->
 
 You can install the development version of **gnumaker** from GitHub
 with:
 
 ``` r
-## if you don't have devtools installed, first run:
-## install.packages("devtools")
+## if you don't have devtools installed, automatically install it from CRAN
+if (!requireNamespace("devtools", quietly = TRUE))
+   install.packages("devtools")
 devtools::install_github("petebaker/gnumaker")
 ```
 
@@ -117,13 +124,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Tue Aug 27 01:09:21 2019
+#> File: Makefile.demo written at Fri Mar 13 18:17:11 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Tue Aug 27 01:09:21 2019
+    # Created at: Fri Mar 13 18:17:11 2020
     
-    # Produced by gnumaker:  0.0.0.9005 on R version 3.6.0 (2019-04-26)
+    # Produced by gnumaker:  0.0.0.9005 on R version 3.6.2 (2019-12-12)
     # Before running make, please check file and edit if necessary
     
     # .PHONY all target which is run when make is invoked

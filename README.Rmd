@@ -41,12 +41,19 @@ Install the latest CRAN version of **gnumaker** with:
 ```{r cran-installation, eval = FALSE}
 ##install.packages("gnumaker")
 ```
+## Note that three dependencies are in BioConductor so use BiocManager
+NB: parked here in case biocViews: line in DESCRIPTION does not work
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+   install.packages("BiocManager")
+devtools::install_github("petebaker/gnumaker", repos = BiocManager::repositories())
 -->
 
 You can install the development version of **gnumaker** from GitHub with:
 ```{r gh-installation, eval = FALSE}
-## if you don't have devtools installed, first run:
-## install.packages("devtools")
+## if you don't have devtools installed, automatically install it from CRAN
+if (!requireNamespace("devtools", quietly = TRUE))
+   install.packages("devtools")
 devtools::install_github("petebaker/gnumaker")
 ```
 
