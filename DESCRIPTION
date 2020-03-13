@@ -1,6 +1,6 @@
 Package: gnumaker
 Title: GNU Makefile Creation and Plotting for Data Analysis Projects
-Version: 0.0.0.9006
+Version: 0.0.0.9007
 Authors@R: person("Peter", "Baker", email = "drpetebaker@gmail.com",
              role = c("aut", "cre"), comment = c(ORCID = "0000-0002-1241-7263"))
 Description: GNU Make is the defacto standard for efficiently
@@ -27,4 +27,4 @@ Imports:
     formatR
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

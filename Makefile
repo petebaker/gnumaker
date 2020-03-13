@@ -8,15 +8,18 @@
 
 RMARKDOWN_GITHUB_OPTS = \"github_document\"
 RMARKDOWN_GITHUB_EXTRAS =
+DESCRIPTION=DESCRIPTION
 
 .PHONY: all
 all: README.md README.pdf
 
 ## .md from .Rmd  - github doc
-%.md: %.Rmd
+%.md: %.Rmd  ${DESCRIPTION}
 	${RSCRIPT} ${RSCRIPT_OPTS} -e "library(rmarkdown);render(\"${@:.md=.Rmd}\", ${RMARKDOWN_GITHUB_OPTS} ${RMARKDOWN_GITHUB_EXTRAS})"
-%.md: %.rmd
+%.md: %.rmd ${DESCRIPTION}
 	${RSCRIPT} ${RSCRIPT_OPTS} -e "library(rmarkdown);render(\"${@:.md=.rmd}\", ${RMARKDOWN_GITHUB_OPTS} ${RMARKDOWN_GITHUB_EXTRAS})"
+
+README.pdf: README.Rmd  ${DESCRIPTION}
 
 ##R_OUT_EXT = Rout
 R_OUT_EXT = pdf
