@@ -159,8 +159,8 @@ For more examples, see the gnumaker vignette (under construction).
 
 ## Notes
 
-**gnumaker** is under construction and should change (and improve)
-rapidly over the next few months.
+**gnumaker** is under construction and could change (and improve)
+rapidly at various times but this depends on work/life balance.
 
 ## To do
 
