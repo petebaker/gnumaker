@@ -125,13 +125,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Fri Jul 10 19:12:12 2020
+#> File: Makefile.demo written at Fri Jul 10 23:53:30 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Fri Jul 10 19:12:12 2020
+    # Created at: Fri Jul 10 23:53:30 2020
     
-    # Produced by gnumaker:  0.0.0.9008 on R version 3.6.3 (2020-02-29)
+    # Produced by gnumaker:  0.0.0.9008 on R version 3.6.1 (2019-07-05)
     # Before running make, please check file and edit if necessary
     
     # .PHONY all target which is run when make is invoked
@@ -225,31 +225,7 @@ info_rules("Rmd")
 
 For more examples, see the gnumaker vignette (under construction).
 
-## Notes
+## Note
 
 **gnumaker** is under construction and could change (and improve)
 rapidly at various times but this depends on work/life balance.
-
-## To do
-
-  - DONE extract dependency and target file extensions in `r-rules.mk`,
-    preferably by parsing the included file (done using `pattern-exts`’)
-  - DONE incorporate dependency and target file extensions extracted
-    using `pattern-exts` into `create_makefile` and set defaults
-  - STARTED move `pattern_exts` to internal functions and create
-    `show_extensions` to assist user specification
-  - TODO allow specification of *global options* in `zzz.R` so that it
-    is easier to customise defaults e.g. so user can specify defaults in
-    .Rprofile
-  - TODO add `testthat` unit testing for more complicated examples
-  - TODO add travis.ci and other automatic checking - see
-    [r-pkgs.had.co.nz/release.html](http://r-pkgs.had.co.nz/release.html)
-  - TODO allow for target file extensions and dependency files to be set
-    as user specified variables which would make the `Makefile`s
-    produced more flexible but less easy to read
-  - TODO allow `target.all` to be determined from DAG if this is
-    sensible
-  - TODO either incorporate `makefile2graph` as a way of plotting
-    `Makefile`s not made with **gnumaker** or write own functions. (See
-    [makefile2graph on
-    github](https://github.com/lindenb/makefile2graph "makefile2graph on github"))

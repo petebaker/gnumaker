@@ -1,0 +1,46 @@
+#+BEGIN_COMMENT
+## Filename:    TODO.org
+## Hostname:    MBS-PU-1NJFVH8
+## Directory:   /Users/uqpbake1/Data/dev/gnumaker/github/gnumaker/notes/
+## Licence:     GPLv3 see <http://www.gnu.org/licenses/>
+## 
+## Created at:  Fri Jul 10 23:33:41 2020
+## Change Log: 
+## 
+#+END_COMMENT
+#+TITLE: TODO gnumaker R package
+#+AUTHOR: Peter Baker
+#+EMAIL: p.baker1@uq.edu.au
+#+TAGS: office(o) home(h) computer(c) graphicalModels(g) workFlow(w) music(m) band(b)
+#+SEQ_TODO: TODO(t) STARTED(s) WAITING(w) APPT(a) | DONE(d) CANCELLED(c) DEFERRED(f)
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/notebook.css" />
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+OPTIONS: H:2 num:nil toc:nil \n:nil @:t ::t |:t ^:{} _:{} *:t TeX:t LaTeX:t
+#+LATEX_HEADER: \usepackage[margin=2.5cm]{geometry}
+#+STARTUP: showall
+#+STARTUP: indent
+#+STARTUP: hidestars
+#+BABEL: :session *R* :cache yes :results output graphics :exports both :tangle yes
+
+* DONE extract dependency and target file extensions in `r-rules.mk`,
+  preferably by parsing the included file (done using `pattern-exts`')
+* DONE incorporate dependency and target file extensions extracted
+  using `pattern-exts` into `create_makefile` and set defaults
+* DONE move `pattern_exts` to internal functions and create
+CLOSED: [2020-07-10 Fri 23:38]
+* TODO either incorporate `makefile2graph` as a way of plotting `Makefile`s not
+  made with **gnumaker** or write own functions.  (See [makefile2graph
+  on github](https://github.com/lindenb/makefile2graph "makefile2graph
+  on github"))
+* TODO allow specification of _global options_ in `zzz.R` so that it
+  is easier to customise defaults e.g. so user can specify defaults in
+  .Rprofile
+* TODO allow `target.all` to be determined from DAG if this is sensible
+* TODO add `testthat` unit testing for more complicated examples
+* TODO add travis.ci 
+- and other automatic checking * see
+  [r-pkgs.had.co.nz/release.html](http://r-pkgs.had.co.nz/release.html)
+* TODO allow for target file extensions and dependency files to be set
+  as user specified variables which would make the `Makefile`s
+  produced more flexible but less easy to read
