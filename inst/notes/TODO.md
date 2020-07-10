@@ -15,7 +15,7 @@ using \`pattern-exts\` into \`create\_makefile\` and set defaults
 
 # TODO either incorporate \`makefile2graph\` as a way of plotting \`Makefile\`s not
 
-made with ****gnumaker\***** or write own functions.  (See [makefile2graph
+made with ****gnumaker\*\***** or write own functions.  (See [makefile2graph
 on github](<https://github.com/lindenb/makefile2graph> "makefile2graph
 on github"))
 

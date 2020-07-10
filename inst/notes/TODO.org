@@ -23,24 +23,24 @@
 #+STARTUP: hidestars
 #+BABEL: :session *R* :cache yes :results output graphics :exports both :tangle yes
 
-** DONE extract dependency and target file extensions in `r-rules.mk`,
+*** DONE extract dependency and target file extensions in `r-rules.mk`,
   preferably by parsing the included file (done using `pattern-exts`')
-** DONE incorporate dependency and target file extensions extracted
+*** DONE incorporate dependency and target file extensions extracted
   using `pattern-exts` into `create_makefile` and set defaults
-** DONE move `pattern_exts` to internal functions and create
+*** DONE move `pattern_exts` to internal functions and create
 CLOSED: [2020-07-10 Fri 23:38]
-** TODO either incorporate `makefile2graph` as a way of plotting `Makefile`s not
-  made with **gnumaker*** or write own functions.  (See [makefile2graph
+*** TODO either incorporate `makefile2graph` as a way of plotting `Makefile`s not
+  made with **gnumaker**** or write own functions.  (See [makefile2graph
   on github](https://github.com/lindenb/makefile2graph "makefile2graph
   on github"))
-** TODO allow specification of _global options_ in `zzz.R` so that it
+*** TODO allow specification of _global options_ in `zzz.R` so that it
   is easier to customise defaults e.g. so user can specify defaults in
   .Rprofile
-** TODO allow `target.all` to be determined from DAG if this is sensible
-** TODO add `testthat` unit testing for more complicated examples
-** TODO add travis.ci 
+*** TODO allow `target.all` to be determined from DAG if this is sensible
+*** TODO add `testthat` unit testing for more complicated examples
+*** TODO add travis.ci 
 - and other automatic checking: see
   [r-pkgs.had.co.nz/release.html](http://r-pkgs.had.co.nz/release.html)
-** TODO allow for target file extensions and dependency files to be set
+*** TODO allow for target file extensions and dependency files to be set
   as user specified variables which would make the `Makefile`s
   produced more flexible but less easy to read
