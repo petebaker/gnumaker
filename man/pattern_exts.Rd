@@ -4,7 +4,11 @@
 \alias{pattern_exts}
 \title{Extract GNU Make pattern rule file extensions}
 \usage{
-pattern_exts(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE)
+pattern_exts(
+  x = "~/lib/r-rules.mk",
+  rm.beamer.templates = FALSE,
+  rm.pythperl.vars = FALSE
+)
 }
 \arguments{
 \item{x}{file name specified as a character string. Default:
@@ -12,6 +16,9 @@ pattern_exts(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE)
 
 \item{rm.beamer.templates}{(logical) as to whether or not to remove
 references to beamer templates. Default: FALSE}
+
+\item{rm.pythperl.vars}{(logical) as to whether or not to remove
+python and perl variable extension references. Default: TRUE}
 }
 \value{
 Object of class \code{gnu_make_exts} which is a list of

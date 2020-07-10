@@ -3,7 +3,7 @@
 
 # gnumaker
 
-Version: 0.0.0.9007
+Version: 0.0.0.9008
 
 ## Overview
 
@@ -19,7 +19,7 @@ from statistical software syntax files, **gnumaker** leverages off
 existing GNU Make rules. These rules, for R, Sweave, R Markdown, Stata,
 SAS and other syntax files are available at [r-makefile-definitions on
 Github](https://github.com/petebaker/r-makefile-definitions). These are
-described in P Baker (2019) Using GNU Make to Manage the Workflow of
+described in P Baker (2020) Using GNU Make to Manage the Workflow of
 Data Analysis Projects, *Journal of Statistical Software (Accepted)*.
 
 For those not familiar with GNU Make, **gnumaker** allows simple
@@ -62,7 +62,8 @@ There are four key functions in **gnumaker**. These are:
   - `create_makefile()` creates a gnu\_makefile object given
     dependencies between syntax, data and output files,
   - `write_makefile()` writes a Makfile to disk,
-  - `info_rules()` describes filename extensions for GNU Make rules, and
+  - `info_rules()` provides information about data analysis GNU Make
+    rules for various target and dependency filename extensions, and
   - `plot()` plots a DAG for a gnu\_makefile object.
 
 ## Example
@@ -124,13 +125,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Thu Jul  9 14:45:55 2020
+#> File: Makefile.demo written at Fri Jul 10 19:12:12 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Thu Jul  9 14:45:55 2020
+    # Created at: Fri Jul 10 19:12:12 2020
     
-    # Produced by gnumaker:  0.0.0.9007 on R version 3.6.3 (2020-02-29)
+    # Produced by gnumaker:  0.0.0.9008 on R version 3.6.3 (2020-02-29)
     # Before running make, please check file and edit if necessary
     
     # .PHONY all target which is run when make is invoked
@@ -180,8 +181,13 @@ info_rules("R")
 #> 
 #> Default: 'Rout'
 #> 
-#> Example rule:
+#> Example rules:
 #> example1.Rout: example1.R dep_file2 dep_file3
+#>  or
+#> example1.Rout: {@:.Rout=.R} dep_file2 dep_file3
+#> 
+#> NB: For further help on Makefile rules, type 'make help' in a terminal once
+#>     an appropriate 'Makefile' is present in the current directory
 ```
 
 For `.Rmd` R Markdown files, use
@@ -196,8 +202,10 @@ info_rules("Rmd")
 #> 
 #> Default: 'html'
 #> 
-#> Example rule:
+#> Example rules:
 #> example1.html: example1.Rmd dep_file2 dep_file3
+#>  or
+#> example1.html: {@:.html=.Rmd} dep_file2 dep_file3
 #> 
 #> Other options are available for R Markdown files, such as:
 #> 
@@ -208,8 +216,11 @@ info_rules("Rmd")
 #> 
 #> An R syntax file can be produced with
 #>   make example1-syntax.R
-#> and a similar rule can be specified if necessary with
+#> and a similar rule can be specified if required with
 #> example1-syntax.R: example1.Rmd dep_file2 dep_file3
+#> 
+#> NB: For further help on Makefile rules, type 'make help' in a terminal once
+#>     an appropriate 'Makefile' is present in the current directory
 ```
 
 For more examples, see the gnumaker vignette (under construction).

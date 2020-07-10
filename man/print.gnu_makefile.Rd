@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_makefile.R
 \name{print.gnu_makefile}
 \alias{print.gnu_makefile}
-\title{Print an object of class gnu_makefile}
+\title{Print a GNU Makefile object}
 \usage{
 \method{print}{gnu_makefile}(x, ...)
 }
@@ -12,5 +12,5 @@
 \item{...}{generic optional arguments to print function}
 }
 \description{
-Print an object of class gnu_makefile
+Print a GNU Makefile object
 }

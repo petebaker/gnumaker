@@ -27,7 +27,7 @@ Version: `r version`
 
 GNU Make is the defacto standard for efficiently rerunning appropriate steps in the data analysis or reporting process if a particular file is changed. Only the necessary steps are rerun.
 
-Rather than creating a new system for setting up and building output from statistical software syntax files, **gnumaker** leverages off existing GNU Make rules. These rules, for R, Sweave, R Markdown, Stata, SAS and other syntax files are available at [r-makefile-definitions on Github](https://github.com/petebaker/r-makefile-definitions). These are described in P Baker (2019) Using GNU Make to Manage the Workflow of Data Analysis Projects, _Journal of Statistical Software (Accepted)_. 
+Rather than creating a new system for setting up and building output from statistical software syntax files, **gnumaker** leverages off existing GNU Make rules. These rules, for R, Sweave, R Markdown, Stata, SAS and other syntax files are available at [r-makefile-definitions on Github](https://github.com/petebaker/r-makefile-definitions). These are described in P Baker (2020) Using GNU Make to Manage the Workflow of Data Analysis Projects, _Journal of Statistical Software (Accepted)_. 
 
 For those not familiar with GNU Make, **gnumaker** allows simple dependencies between files to be specified to produce a working Makefile and the associated directed acyclic graph (DAG). 
 I'd welcome Github issues containing error reports or feature requests. 
@@ -63,7 +63,7 @@ There are four key functions in **gnumaker**. These are:
 
 * `create_makefile()` creates a gnu\_makefile object given dependencies between syntax, data and output files,
 * `write_makefile()` writes a Makfile to disk,
-* `info_rules()` describes filename extensions for GNU Make rules, and
+* `info_rules()` provides information about data analysis GNU Make rules for various target and dependency filename extensions, and
 * `plot()` plots a DAG for a gnu\_makefile object.
 
 ## Example

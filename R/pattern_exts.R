@@ -14,6 +14,8 @@
 ##'   \dQuote{~/lib/r-rules.mk}
 ##' @param rm.beamer.templates (logical) as to whether or not to remove
 ##'   references to beamer templates. Default: FALSE
+##' @param rm.pythperl.vars (logical) as to whether or not to remove
+##'   python and perl variable extension references. Default: TRUE
 ##'
 ##' @return Object of class \code{gnu_make_exts} which is a list of
 ##'   file name extensions to be used in creating working
@@ -33,7 +35,8 @@
 ##'
 ##' @seealso \code{\link{create_makefile}}
 ##' @export
-pattern_exts  <- function(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE){
+pattern_exts  <- function(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE,
+                          rm.pythperl.vars = FALSE){
 
   ## check/set GNU Make rules file ------------------------------
   if (!file.exists(x)) stop(paste(x, "does not exist"))
@@ -55,14 +58,31 @@ pattern_exts  <- function(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE){
   ## drop off any reference to beamer templates ???
   ## if left in it could start to look messy but is this a prob?
   ## presumably should be left to case when producing Makefile/plots
-
+  
+  beamer_str <-
+    paste(paste0("([ ]*\\$\\(BEAMER_", c("ARTICLE", "HANDOUT", "NOTES",
+                                         "PRESENT"), "\\))"), collapse = "|")
+  rules4 <- sapply(rules3, gsub, pattern = beamer_str, replacement = "")
+  names(rules4) <- NULL
+  rules3 <- rules4
+  ## unfortunately, hard to program this as we want to squash all 3
+  ## rules for each Rnw/rnw -> beamer into two chained rules  for Article etc
+  ## how to fix these? _Article, _Handout, _Notes, _Present
+  ## here's the easy/non-clever way
+  beamer_rules1 <- rules3[grep("_Article*\\.[rR]nw$|_Notes*\\.[rR]nw$|_Present*\\.[rR]nw$|_Handout*\\.[rR]nw$", rules3)]
+  beamer_rules1 <- rules3[grep("_Article|_Notes|_Present|_Handout", rules3)]
+  beamer_rulesh <- beamer_rules1[droph <- -grep(".pdf$", beamer_rules1)]
   if (rm.beamer.templates){
-    beamer_str <-
-      paste(paste0("([ ]*\\$\\(BEAMER_", c("ARTICLE", "HANDOUT", "NOTES",
-                                        "PRESENT"), "\\))"), collapse = "|")
-    rules4 <- sapply(rules3, gsub, pattern = beamer_str, replacement = "")
-    names(rules4) <- NULL
-    rules3 <- rules4
+    ## drop all beamer related rules from rules3
+    rules3 <- setdiff(rules3, beamer_rules1)
+  } else {
+    ## drop the intermediate .Rnw files and conert then to _TYPE.pdf from .Rnw
+    rules3 <- setdiff(rules3, beamer_rulesh)
+    ## create 1 rule from each of 3 rules by removing pdf then
+    ## replacing first Rnw/rnw with pdf
+    beamer_rulesh2 <- beamer_rulesh[-grep(".pdf", beamer_rulesh)]
+    beamer_rulesh2 <- sub(".[Rr]nw", ".pdf", beamer_rulesh2)
+    rules3 <- c(beamer_rulesh2, rules3)
   }
   
   ## extract pattern rules with variables only -------------------
@@ -92,10 +112,11 @@ pattern_exts  <- function(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE){
            v_start[[1]], v_stop[[1]])
   }
 
+
   ## extract all variable names
   vars <- unique(unlist(sapply(rules_vars, extract_var_rules)))
   ## make sure beamer handled correctly
-  if (!rm.beamer.templates) vars <- c("BEAMER_LIB", vars)
+  ## if (!rm.beamer.templates) vars <- c("BEAMER_LIB", vars)
   
   ## NB: ONLY IMPORTANT IF ACTUALLY A FILE EXTENSION OR PART OF
   ##     FILENAME - not a dependency like in beamer stuff
@@ -112,12 +133,12 @@ pattern_exts  <- function(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE){
     lapply(ev, function(x) {if (length(x)==2) trimws(x[2]) else ""})
   names(vars2) <- sapply(ev, function(z) trimws(z[[1]][1]))
   ## vars2
-
+  
   ## DECISION: DO I substitute variables in now - think not - or allow
   ## user/makefile itself to overwrite - need to think thru
-
+  
   ## what format do I need this in???
-
+  
   ## get target file extensions and possible dependencies
   t_start <- gregexpr( "^%\\.", rules3)
   t_stop <- gregexpr( ":", rules3)
@@ -127,27 +148,27 @@ pattern_exts  <- function(x = "~/lib/r-rules.mk", rm.beamer.templates = FALSE){
     mapply(function(x, tstop) trimws(substr(x, 2, tstop - 1)),
            rules3, t_stop)
   target_exts <- gsub("^\\.", "", target_exts)
-
+  
   dep_exts <- 
     mapply(function(x, dstart)
       trimws(substr(x, dstart[1] + attr(dstart, "match.length") + 1,
                     nchar(x))), rules3, d_start)
   dep_exts <- gsub("^\\.", "", dep_exts)
-
+  
   ## length(unique(target_exts))
   ## length(unique(dep_exts))
-
+  
   targs <- unique(target_exts)
   deps <- unique(dep_exts)
   deps1 <-
     unique(sapply(tmp_dep <- strsplit(deps, " "), function(x) x[[1]][1]))
-
+  
   dep_targs <- vector(mode = "list", length = length(deps1))
   names(dep_targs) <- deps1
   ttt <- target_exts
   names(ttt)  <- NULL
   for (D in deps1) dep_targs[[D]] <- ttt[dep_exts == D] 
-
+  
   dep_targs_all <- dep_targs
   ## drop beamer intermediate files because don't want these specified
   ## in Makefile but these are automatically created

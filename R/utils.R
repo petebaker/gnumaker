@@ -259,6 +259,7 @@ save_dep_targ_exts <- function(x = "../inst/make/r-rules.mk",
          PL = "txt", pl = "txt",
          PY = "txt", py = "txt",
          PY = "txt", py = "txt",
+         SPS = "PDF", sps = "pdf",
          "_Handout.pdf" = "-6up.pdf",
          "_beamer-handout.pdf" = "_beamer-6up.pdf")
     

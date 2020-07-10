@@ -2,9 +2,14 @@
 % Please edit documentation in R/info_rules.R
 \name{info_rules}
 \alias{info_rules}
-\title{Displaya information about file extension names for GNU Make pattern rules}
+\title{Information on available file extensions for GNU Make pattern rules}
 \usage{
-info_rules(dependency.ext = "R", list.all = FALSE)
+info_rules(
+  dependency.ext = "R",
+  list.all = FALSE,
+  list.defaults = FALSE,
+  list.targets.all = FALSE
+)
 }
 \arguments{
 \item{dependency.ext}{\code{string} specifying the filename
@@ -13,12 +18,18 @@ extensions. Default: \dQuote{R}}
 
 \item{list.all}{\code{logical} indicating whether to list all
 possible dependency filename extensions. Default: FALSE}
+
+\item{list.defaults}{\code{logical} list default target extensions for
+all dependency filename extensions? Default: FALSE}
+
+\item{list.targets.all}{\code{logical} list all possible target extensions for
+all rules? Default: FALSE}
 }
 \value{
 Nothing is returned but instead information is printed
 }
 \description{
-\code{info_rules} displays target filename extensions for dependency files
+\code{info_rules} displays filename extensions for target and dependency files
 }
 \details{
 GNU Make pattern rules allow wildcarding so that generic rules may

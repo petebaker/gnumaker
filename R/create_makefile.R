@@ -157,7 +157,7 @@ create_makefile  <-
   gnumaker
 }
 
-##' Print an object of class gnu_makefile
+##' Print a GNU Makefile object
 ##'
 ##' @param x of class gnu_makefile
 ##' @param ... generic optional arguments to print function
