@@ -90,7 +90,7 @@ gm1 <-
                   target.all = c("rep1", "rep2"),
                   all.exts = list(rep1 = "pdf", rep2 = "docx"))
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:33:41 2020
+#> File: Makefile.demo written at Sun Jul 19 15:40:31 2020
 ```
 
 To plot the DAG, we use:
@@ -102,7 +102,7 @@ plot(gm1)
 ![DAG of Makefile for simple example. The DAG of the `gnu_makefile`
 object can be produced with `plot(gm1)`. Using the minimal set of files
 (shown in green rectangles), then GNU Make allows us to (re)generate all
-other files shown as wheat coloured circles)](images/simple-dag0-1.png)
+other files shown as wheat coloured circles)](images/simple-dag-1.png)
 
 ### Details
 
@@ -160,11 +160,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:33:41 2020
+#> File: Makefile.demo written at Sun Jul 19 15:40:31 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Sun Jul 19 15:33:41 2020
+    # Created at: Sun Jul 19 15:40:31 2020
     
     # Produced by gnumaker:  0.0.0.9009 on R version 4.0.2 (2020-06-22)
     # Before running make, please check file and edit if necessary
@@ -196,7 +196,7 @@ write_makefile(gm1, file = "Makefile.demo")
 
 <!-- The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. -->
 
-<!-- ```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"} -->
+<!-- ```{r, simple-dag2, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"} -->
 
 <!-- plot(gm1) -->
 

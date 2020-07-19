@@ -96,7 +96,7 @@ write_makefile(gm1, file = "Makefile.demo")
 
 To plot the DAG, we use:
 
-```{r, simple-dag0, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
+```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
 plot(gm1)
 ```
 
@@ -165,7 +165,7 @@ cat Makefile.demo
 
 <!-- The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. -->
 
-<!-- ```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"} -->
+<!-- ```{r, simple-dag2, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"} -->
 <!-- plot(gm1) -->
 <!-- ``` -->
 
