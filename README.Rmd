@@ -59,12 +59,13 @@ devtools::install_github("petebaker/gnumaker")
 
 ## Usage
 
-There are four key functions in **gnumaker**. These are:
+There are currently four key functions in **gnumaker**. These are:
 
-* `create_makefile()` creates a gnu\_makefile object given dependencies between syntax, data and output files,
-* `write_makefile()` writes a Makfile to disk,
-* `info_rules()` provides information about data analysis GNU Make rules for various target and dependency filename extensions, and
-* `plot()` plots a DAG for a gnu\_makefile object.
+* `create_makefile()` creates a `gnu_makefile` object given the
+  specified dependencies between syntax, data and output files,
+* `write_makefile()` writes a `gnu_makefile` object to a `Makfile` on disk,
+* `info_rules()` provides information about data analysis `GNU Make` rules for various target and dependency filename extensions, and
+* `plot()` plots the DAG of a `gnu_makefile` object.
 
 ## Example
 
@@ -75,45 +76,72 @@ stored results, two reports `report1.pdf` and `report2.docx` are
 produced from `report1.Rmd` and `report2.Rmd`. The workflow may be
 encapsulated in a Makefile which is then employed to manage the
 process and generate or regenerate any intermediate files when the
-data or syntax changes.
+data or syntax changes. 
+
+Rather than writing `GNU Make` commands, we can employ the
+**gnumaker** package to create an appropriate `Makefile` called
+`Makefile.demo` with:
+
+```{r, simple-demo0}
+library(gnumaker)
+gm1 <-
+  create_makefile(targets = list(read = c("read.R", "simple.csv"),
+                  linmod = c("linmod.R", "read"),
+                  rep1 = c("report1.Rmd", "linmod"),
+                  rep2 = c("report2.Rmd", "linmod")),
+                  target.all = c("rep1", "rep2"),
+                  all.exts = list(rep1 = "pdf", rep2 = "docx"))
+write_makefile(gm1, file = "Makefile.demo")
+```
+
+To plot the DAG, we use:
+
+```{r, simple-dag0, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
+plot(gm1)
+```
+
+### Details
 
 Using the **gnumaker** package we simply need to provide a list of
 targets to the the `create_makefile` function where the components
 specify a target as a name and dependency file(s) as a character
-vector. The package uses the GNU Make pattern rules in _r-rules.mk_ to
-choose file names for targets but we can override the defaults.
+vector. The package uses the `GNU Make` pattern rules in `r-rules.mk`
+to choose file names for targets but we can override the defaults.
 
 For instance, in this example the first two dependency files are
-`simple.csv` and `read.R` so we provide the first target as the
-first component of the list as `read = c("read.R", "simple.csv")`,
-where the name `read` can be anything we like.  The second target
-depends on the `read` target and `linmod.R` and so we specify this
-with `linmod = c("linmod.R", "read")` and so on.
+`simple.csv` and `read.R` so we provide the first target as the first
+component of the list as `read = c("read.R", "simple.csv")`, where the
+name `read` can be anything we like. Note that the target filename for
+`read` will be derived from the first failename in the list `read.R`.
+The second target depends on the `read` target and `linmod.R` and so
+we specify this with `linmod = c("linmod.R", "read")` and so on.
 
-Target file names are substituted using defaults and the _Makefile_ is
-rearranged using the DAG of the relationships. For instance, the
-default target file for the first dependency in the `read` component,
-which is `read.R`, becomes `read.Rout` but we can change the default
-target file extension for all `.R` files using the `default.exts`
-argument and specify say a HTML target file with 
-`default.exts = list(R = "html")`.
-
+Using the function `create_makefile` to create a `gnu_makefile`
+object, target file names are substituted using defaults and the
+appropriate `Make` commands are rearranged using the DAG of the
+relationships. For instance, the default target file for the first
+dependency in the `read` component, which is `read.R`, becomes
+`read.Rout` but we can change the default target file extension for
+all `.R` files using the `default.exts` argument and specify say a
+HTML target file with `default.exts = list(R = "html")`.
 
 Finally we specify the first target (usually `all`) as two reports
-`report1.pdf` and `report2.docx` using 
-`target.all = c("rep1","rep2")` which by default would be
- `report1.html` and `report2.html` but which we specify as 
- `report1.pdf` and `report2.docx` by specifying the option
- `all.exts = list(rep1 = "pdf", rep2 = "docx")`. 
+`report1.pdf` and `report2.docx` using `target.all = c("rep1","rep2")`
+which by default would be `report1.html` and `report2.html` but which
+we specify as `report1.pdf` and `report2.docx` by specifying the
+option `all.exts = list(rep1 = "pdf", rep2 = "docx")`.
  
- To run all R script filesand analyses in order we simply type `make`
- in a terminal or set up `RStudio` or our IDE to use GNU Make as the
- build mechanism which allows us to (re)run analyses by pressing the
- appropriate Build button.
+Once we have constructed a suitable `gnu_makefile` object then we
+write it to disk with `write_makefile`. To run all `R` script files
+and analyses in order we simply type `make` in a terminal or set up
+`RStudio` or our IDE to use GNU Make as the build mechanism which
+allows us to (re)run analyses by pressing the appropriate Build
+button.
  
- The `Makefile` is specified, printed and plotted using:
+The `Makefile`, with optional comment for `linmod` target, is
+specified using:
 
-```{r, simple-demo}
+```{r, simple-demo1}
 library(gnumaker)
 gm1 <-
   create_makefile(targets = list(read = c("read.R", "simple.csv"),
@@ -127,7 +155,7 @@ gm1 <-
 
 A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
-```{r, simple-makefile}
+```{r, simple-makefile1}
 write_makefile(gm1, file = "Makefile.demo")
 ```
 
@@ -135,11 +163,11 @@ write_makefile(gm1, file = "Makefile.demo")
 cat Makefile.demo
 ```
 
-The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`.
+<!-- The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. -->
 
-```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
-plot(gm1)
-```
+<!-- ```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"} -->
+<!-- plot(gm1) -->
+<!-- ``` -->
 
 We can use the function `info_rules` to determine the possible target
 files for dependency files. For instance, what target files have

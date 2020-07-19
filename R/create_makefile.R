@@ -69,8 +69,8 @@
 create_makefile  <-
   function(targets, target.all = NULL, all.exts = NULL, 
            phony = NULL, comments = NULL, auto.variables = FALSE,
-           default.exts = NULL, rules.mk = "~/lib/r-rules.mk"){
-
+           default.exts = NULL, rules.mk = "~/lib/r-rules.mk")
+{
   ## checking and defaulting - might be good to use internal functions
   ## to keep coding clean although perhaps even more useful to put
   ## them in utils.R and not export them
@@ -111,7 +111,7 @@ create_makefile  <-
   if (is.null(phony)) phony <- phony.cleanall
   
   phony.all <-
-    c("# .PHONY all target which is run when make is invoked",
+    c("# .PHONY all target: run when 'make' is invoked without a target",
       ".PHONY: all")
   
   ## end defaults ------------------------------------------------
@@ -163,7 +163,8 @@ create_makefile  <-
 ##' @param ... generic optional arguments to print function
 ##' @method print gnu_makefile
 ##' @export
-print.gnu_makefile <- function(x, ...){
+print.gnu_makefile <- function(x, ...)
+{
   cat("Makefile:\n")
   print(x$gnu_makefile, ...)
   cat("\nMakefile DAG:\n")

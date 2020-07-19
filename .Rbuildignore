@@ -1,3 +1,9 @@
 ^gnumaker\.Rproj$
 ^\.Rproj\.user$
-R/notes.org
+^notes.org$
+^Makefile$
+^Makefile.demo$
+^README.Rmd$
+^README.html$
+^README.pdf$
+^images/*$

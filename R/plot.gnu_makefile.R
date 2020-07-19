@@ -34,7 +34,8 @@
 ##' @export
 plot.gnu_makefile <- function(x, nodes.color = "wheat",
                               parents.shape = "box",
-                              parents.color = "lightgreen", ...){
+                              parents.color = "lightgreen", ...)
+{
     if (class(x) != "gnu_makefile")
       stop("'x' must be of class 'gnu_makefile'")
 
