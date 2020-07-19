@@ -57,14 +57,15 @@ devtools::install_github("petebaker/gnumaker")
 
 ## Usage
 
-There are four key functions in **gnumaker**. These are:
+There are currently four key functions in **gnumaker**. These are:
 
-  - `create_makefile()` creates a gnu\_makefile object given
-    dependencies between syntax, data and output files,
-  - `write_makefile()` writes a Makfile to disk,
-  - `info_rules()` provides information about data analysis GNU Make
+  - `create_makefile()` creates a `gnu_makefile` object given the
+    specified dependencies between syntax, data and output files,
+  - `write_makefile()` writes a `gnu_makefile` object to a `Makfile` on
+    disk,
+  - `info_rules()` provides information about data analysis `GNU Make`
     rules for various target and dependency filename extensions, and
-  - `plot()` plots a DAG for a gnu\_makefile object.
+  - `plot()` plots the DAG of a `gnu_makefile` object.
 
 ## Example
 
@@ -89,12 +90,14 @@ name `read` can be anything we like. The second target depends on the
 `read` target and `linmod.R` and so we specify this with `linmod =
 c("linmod.R", "read")` and so on.
 
-Target file names are substituted using defaults and the *Makefile* is
-rearranged using the DAG of the relationships. For instance, the default
-target file for the first dependency in the `read` component, which is
-`read.R`, becomes `read.Rout` but we can change the default target file
-extension for all `.R` files using the `default.exts` argument and
-specify say a HTML target file with `default.exts = list(R = "html")`.
+Using the function `create_makefile` to create a `gnu_makefile` object,
+target file names are substituted using defaults and the appropriate
+`Make` commands are rearranged using the DAG of the relationships. For
+instance, the default target file for the first dependency in the `read`
+component, which is `read.R`, becomes `read.Rout` but we can change the
+default target file extension for all `.R` files using the
+`default.exts` argument and specify say a HTML target file with
+`default.exts = list(R = "html")`.
 
 Finally we specify the first target (usually `all`) as two reports
 `report1.pdf` and `report2.docx` using `target.all = c("rep1","rep2")`
@@ -102,10 +105,11 @@ which by default would be `report1.html` and `report2.html` but which we
 specify as `report1.pdf` and `report2.docx` by specifying the option
 `all.exts = list(rep1 = "pdf", rep2 = "docx")`.
 
-To run all R script filesand analyses in order we simply type `make` in
-a terminal or set up `RStudio` or our IDE to use GNU Make as the build
-mechanism which allows us to (re)run analyses by pressing the
-appropriate Build button.
+Once we have constructed a suitable `gnu_makefile` object then we write
+it to disk with `write_makefile`. To run all `R` script files and
+analyses in order we simply type `make` in a terminal or set up
+`RStudio` or our IDE to use GNU Make as the build mechanism which allows
+us to (re)run analyses by pressing the appropriate Build button.
 
 The `Makefile` is specified, printed and plotted using:
 
@@ -125,13 +129,13 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Fri Jul 10 23:53:30 2020
+#> File: Makefile.demo written at Sun Jul 19 14:22:47 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Fri Jul 10 23:53:30 2020
+    # Created at: Sun Jul 19 14:22:47 2020
     
-    # Produced by gnumaker:  0.0.0.9008 on R version 3.6.1 (2019-07-05)
+    # Produced by gnumaker:  0.0.0.9008 on R version 4.0.2 (2020-06-22)
     # Before running make, please check file and edit if necessary
     
     # .PHONY all target which is run when make is invoked
