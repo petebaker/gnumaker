@@ -90,10 +90,10 @@ gm1 <-
                   target.all = c("rep1", "rep2"),
                   all.exts = list(rep1 = "pdf", rep2 = "docx"))
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:47:57 2020
+#> File: Makefile.demo written at Sun Jul 19 15:51:13 2020
 ```
 
-To plot the DAG, where can (re)generate target files (wheat coloured
+To plot the DAG, where we can (re)generate target files (wheat coloured
 circles) from a minimal set of syntax and data files (green rectangles),
 use:
 
@@ -162,11 +162,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:47:57 2020
+#> File: Makefile.demo written at Sun Jul 19 15:51:13 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Sun Jul 19 15:47:57 2020
+    # Created at: Sun Jul 19 15:51:13 2020
     
     # Produced by gnumaker:  0.0.0.9009 on R version 4.0.2 (2020-06-22)
     # Before running make, please check file and edit if necessary
