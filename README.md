@@ -90,7 +90,7 @@ gm1 <-
                   target.all = c("rep1", "rep2"),
                   all.exts = list(rep1 = "pdf", rep2 = "docx"))
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:18:54 2020
+#> File: Makefile.demo written at Sun Jul 19 15:33:41 2020
 ```
 
 To plot the DAG, we use:
@@ -160,11 +160,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:18:54 2020
+#> File: Makefile.demo written at Sun Jul 19 15:33:41 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Sun Jul 19 15:18:54 2020
+    # Created at: Sun Jul 19 15:33:41 2020
     
     # Produced by gnumaker:  0.0.0.9009 on R version 4.0.2 (2020-06-22)
     # Before running make, please check file and edit if necessary
