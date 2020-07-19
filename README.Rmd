@@ -94,7 +94,7 @@ gm1 <-
 write_makefile(gm1, file = "Makefile.demo")
 ```
 
-To plot the DAG, we use:
+To plot the DAG, where can (re)generate target files (wheat coloured circles) from a minimal set of syntax and data files (green rectangles), use:
 
 ```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
 plot(gm1)
