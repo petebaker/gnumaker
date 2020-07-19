@@ -23,7 +23,7 @@ Version: `r version`
 
 ## Overview
 
-**gnumaker** makes if easy to create and use GNU Makefiles to aid a reproducible work flow for data analysis projects.
+**gnumaker** makes it easy to create and use GNU Makefiles to aid a reproducible work flow for data analysis projects.
 
 GNU Make is the defacto standard for efficiently rerunning appropriate steps in the data analysis or reporting process if a particular file is changed. Only the necessary steps are rerun.
 
@@ -94,7 +94,7 @@ gm1 <-
 write_makefile(gm1, file = "Makefile.demo")
 ```
 
-To plot the DAG, where we can (re)generate target files (wheat coloured circles) from a minimal set of syntax and data files (green rectangles), use:
+To plot the corresponding DAG, which shows the relationships between target files (wheat coloured circles) which we can (re)generate from a minimal set of syntax and data files (green rectangles), use:
 
 ```{r, simple-dag, fig.cap = "DAG of Makefile for simple example. The DAG of the `gnu_makefile` object can be produced with `plot(gm1)`. Using the minimal set of files (shown in green rectangles), then GNU Make allows us to (re)generate all other files shown as wheat coloured circles)"}
 plot(gm1)
