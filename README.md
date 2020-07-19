@@ -16,17 +16,19 @@ changed. Only the necessary steps are rerun.
 
 Rather than creating a new system for setting up and building output
 from statistical software syntax files, **gnumaker** leverages off
-existing GNU Make rules. These rules, for R, Sweave, R Markdown, Stata,
-SAS and other syntax files are available at [r-makefile-definitions on
+existing GNU Make rules. These rules, for `R`, `Sweave`, `R Markdown`,
+`Stata`, `SAS`, `PSPP`, `Python`, `Perl` and other syntax files are
+available at [r-makefile-definitions on
 Github](https://github.com/petebaker/r-makefile-definitions). These are
-described in P Baker (2020) Using GNU Make to Manage the Workflow of
+described in P Baker (2020) Using `GNU Make` to Manage the Workflow of
 Data Analysis Projects, *Journal of Statistical Software (Accepted)*.
 
-For those not familiar with GNU Make, **gnumaker** allows simple
-dependencies between files to be specified to produce a working Makefile
-and the associated directed acyclic graph (DAG). I’d welcome Github
-issues containing error reports or feature requests. Alternatively, you
-can email the package maintainer at drpetebaker at gmail dot com.
+For those not familiar with `GNU Make`, **gnumaker** allows simple
+dependencies between files to be specified to produce a working
+`Makefile` and the associated directed acyclic graph (DAG). I’d welcome
+`Github` issues containing error reports or feature requests.
+Alternatively, you can email the package maintainer at `drpetebaker at
+gmail dot com`.
 
 ## Installation
 
@@ -45,7 +47,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 devtools::install_github("petebaker/gnumaker", repos = BiocManager::repositories())
 -->
 
-You can install the development version of **gnumaker** from GitHub
+You can install the development version of **gnumaker** from `GitHub`
 with:
 
 ``` r
@@ -74,7 +76,7 @@ clean the data. After storing the cleaned data in a .RData file, we then
 employ `linmod.R` to plot and analyse the data. Next, using the stored
 results, two reports `report1.pdf` and `report2.docx` are produced from
 `report1.Rmd` and `report2.Rmd`. The workflow may be encapsulated in a
-Makefile which is then employed to manage the process and generate or
+`Makefile` which is then employed to manage the process and generate or
 regenerate any intermediate files when the data or syntax changes.
 
 Rather than writing `GNU Make` commands, we can employ the **gnumaker**
@@ -90,21 +92,23 @@ gm1 <-
                   target.all = c("rep1", "rep2"),
                   all.exts = list(rep1 = "pdf", rep2 = "docx"))
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:59:40 2020
+#> File: Makefile.demo written at Mon Jul 20 00:44:21 2020
 ```
 
 To plot the corresponding DAG, which shows the relationships between
 target files (wheat coloured circles) which we can (re)generate from a
-minimal set of syntax and data files (green rectangles), use:
+minimal set of syntax and data files (green rectangles) using `GNU
+Make`, use:
 
 ``` r
 plot(gm1)
 ```
 
-![DAG of Makefile for simple example. The DAG of the `gnu_makefile`
+![DAG of `Makefile` for simple example. The DAG of the `gnu_makefile`
 object can be produced with `plot(gm1)`. Using the minimal set of files
-(shown in green rectangles), then GNU Make allows us to (re)generate all
-other files shown as wheat coloured circles)](images/simple-dag-1.png)
+(shown in green rectangles), then `GNU Make` allows us to (re)generate
+all other files shown as wheat coloured
+circles)](images/simple-dag-1.png)
 
 ### Details
 
@@ -118,8 +122,8 @@ For instance, in this example the first two dependency files are
 `simple.csv` and `read.R` so we provide the first target as the first
 component of the list as `read = c("read.R", "simple.csv")`, where the
 name `read` can be anything we like. Note that the target filename for
-`read` will be derived from the first failename in the list `read.R`.
-The second target depends on the `read` target and `linmod.R` and so we
+`read` will be derived from the first filename in the list `read.R`. The
+second target depends on the `read` target and `linmod.R` and so we
 specify this with `linmod = c("linmod.R", "read")` and so on.
 
 Using the function `create_makefile` to create a `gnu_makefile` object,
@@ -162,11 +166,11 @@ A Makefile `Makefile.demo` is produced with `write_makefile(gm1)`
 
 ``` r
 write_makefile(gm1, file = "Makefile.demo")
-#> File: Makefile.demo written at Sun Jul 19 15:59:40 2020
+#> File: Makefile.demo written at Mon Jul 20 00:44:21 2020
 ```
 
     # File: Makefile.demo
-    # Created at: Sun Jul 19 15:59:40 2020
+    # Created at: Mon Jul 20 00:44:21 2020
     
     # Produced by gnumaker:  0.0.0.9009 on R version 4.0.2 (2020-06-22)
     # Before running make, please check file and edit if necessary
@@ -206,7 +210,7 @@ write_makefile(gm1, file = "Makefile.demo")
 
 We can use the function `info_rules` to determine the possible target
 files for dependency files. For instance, what target files have
-`Makefile` rules for an `.R` R syntax file?
+`Makefile` rules for an `.R` `R` syntax file?
 
 ``` r
 info_rules("R")
@@ -257,9 +261,9 @@ info_rules("Rmd")
 #>     an appropriate 'Makefile' is present in the current directory
 ```
 
-For more examples, see the gnumaker vignette (under construction).
+For more examples, see the **gnumaker** vignette (under construction).
 
 ## Note
 
-**gnumaker** is under construction and could change (and improve)
-rapidly at various times but this depends on work/life balance.
+The **gnumaker** `R` package is under construction and could change (and
+improve) rapidly at various times but this depends on work/life balance.
